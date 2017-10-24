@@ -1,0 +1,21 @@
+version: 1.0.0
+spring:
+  application:
+    name: dragonfly-gate #表示应用名称
+server:
+  port: 8870
+zuul:
+  routes:
+    baidu:
+      path: /baidu/**
+      url: http://www.baidu.com
+    admin:
+      path: /admin/**
+      serviceId: dragonfly-ui
+    security:
+      path: /security/**
+      serviceId: dragonfly-security
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka/
