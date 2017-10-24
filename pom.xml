@@ -21,6 +21,8 @@
     <modules>
         <module>dragonfly-center</module>
         <module>dragonfly-ui</module>
+        <module>dragonfly-gate</module>
+        <module>dragonfly-security</module>
     </modules>
 
     <parent>

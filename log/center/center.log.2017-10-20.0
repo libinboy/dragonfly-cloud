@@ -1,0 +1,2 @@
+2017-10-20 16:45:58,173 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-10-20 16:46:03,105 INFO (StartupInfoLogger.java:57)- Started CenterApplication in 6.017 seconds (JVM running for 6.443)

@@ -1,0 +1,4 @@
+2017-10-24 20:12:59,841 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-10-24 20:13:03,730 INFO (StartupInfoLogger.java:57)- Started SecurityApplication in 4.995 seconds (JVM running for 6.004)
+2017-10-24 20:17:21,033 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-10-24 20:17:24,471 INFO (StartupInfoLogger.java:57)- Started SecurityApplication in 4.724 seconds (JVM running for 5.269)

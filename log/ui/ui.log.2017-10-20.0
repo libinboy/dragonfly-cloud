@@ -1,0 +1,2 @@
+2017-10-20 16:46:14,382 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-10-20 16:46:16,369 INFO (StartupInfoLogger.java:57)- Started UiApplication in 3.089 seconds (JVM running for 3.794)
