@@ -6,9 +6,6 @@ server:
   port: 8870
 zuul:
   routes:
-    baidu:
-      path: /baidu/**
-      url: http://www.baidu.com
     admin:
       path: /admin/**
       serviceId: dragonfly-ui
