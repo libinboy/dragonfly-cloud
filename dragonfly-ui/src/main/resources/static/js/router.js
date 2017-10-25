@@ -14,11 +14,12 @@ angular.module('app')
   .config(
     ['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/access/signin');
+
         $stateProvider
           .state('app', {
               abstract: true,
               url: '/app',
-              templateUrl: 'page/dashboard/app.html'
+              templateUrl: 'page/main/main.html'
           })
           .state('app.dashboard', {
               url: '/dashboard',
@@ -32,12 +33,12 @@ angular.module('app')
           })
 
           // user
-          .state('app.user', {
-              url: '/user',
+          .state('app.system', {
+              url: '/system',
               template: '<div ui-view class="fade-in-down"></div>'
           })
-          .state('app.user.list', {
-              url: '/list',
+          .state('app.system.user', {
+              url: '/user',
               templateUrl: 'page/user/listUser.html',
 			  resolve: {
 				deps: ['$ocLazyLoad',
@@ -66,24 +67,6 @@ angular.module('app')
                       return uiLoad.load( ['page/signin/signin.js'] );
                   }]
               }
-          })
-          .state('access.signup', {
-              url: '/signup',
-              templateUrl: 'admin/access/signup.html',
-              resolve: {
-                  deps: ['uiLoad',
-                    function( uiLoad ){
-                      return uiLoad.load( ['admin/access/signup.js'] );
-                  }]
-              }
-          })
-          .state('access.forgotpwd', {
-              url: '/forgotpwd',
-              templateUrl: 'admin/access/forgotpwd.html'
-          })
-          .state('access.404', {
-              url: '/404',
-              templateUrl: 'admin/access/404.html'
           });
       }
     ]
