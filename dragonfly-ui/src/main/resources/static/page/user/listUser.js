@@ -1,5 +1,7 @@
 app.controller('listUserCtrl', ['$scope', '$http', function($scope, $http) {
 
+    $scope.userVO = {};
+
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: false
@@ -34,7 +36,7 @@ app.controller('listUserCtrl', ['$scope', '$http', function($scope, $http) {
     };
     $scope.getPagedDataAsync = function (pageSize, page, searchText) {
         setTimeout(function () {
-            $http.get('/security/user/list/page').success(function (largeLoad) {
+            $http.post('/security/user/list/page', $scope.userVO).success(function (largeLoad) {
                 $scope.setPagingData(largeLoad,page,pageSize);
             });
         }, 100);
@@ -53,6 +55,10 @@ app.controller('listUserCtrl', ['$scope', '$http', function($scope, $http) {
           $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
         }
     }, true);
+
+    $scope.submit = function () {
+        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+    };
 
 
 }]);
