@@ -1,18 +1,17 @@
 package com.dragonfly.cloud.security.controller;
 
-import com.dragonfly.cloud.security.vo.UserVO;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.dragonfly.cloud.common.response.BootstrapTableResponse;
+import com.dragonfly.cloud.security.entity.User;
+import com.dragonfly.cloud.security.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Administrator on 2017/10/25 0025.
@@ -24,21 +23,46 @@ public class UserController
 {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    @Autowired
+    private UserService userService;
+
     @ApiOperation(value = "查询用户列表", notes = "")
-    @RequestMapping(value = "/list/page", method = RequestMethod.POST)
+    @PostMapping(value = "/page")
     @ResponseBody
-    public List<UserVO> queryAllUser(@RequestBody UserVO userVO)
+    public BootstrapTableResponse<User> selectUserListPage(@RequestParam(defaultValue = "10") int limit, @RequestParam(defaultValue = "1")int offset, @RequestBody User user)
     {
-        logger.debug("email:" + userVO.getEmail());
-        List<UserVO> list = new ArrayList<UserVO>();
-        UserVO user = null;
-        for(int i= 0; i < 1000; i++)
-        {
-            user = new UserVO();
-            user.setEmail("libin" + i + "@123.com");
-            user.setPassword("libin" + i);
-            list.add(user);
-        }
-        return list;
+        logger.debug("limit:" + limit);
+        logger.debug("offset:" + offset);
+        logger.debug("account:" + user.getAccount());
+
+        Page<User> page = new Page<>(offset, limit);
+        EntityWrapper<User> entityWrapper = new EntityWrapper<>(user);
+        userService.selectPage(page, entityWrapper);
+
+        BootstrapTableResponse<User> tableResponse =  new BootstrapTableResponse<>();
+        tableResponse.setTotal(page.getTotal());
+        tableResponse.setRows(page.getRecords());
+
+        return tableResponse;
     }
+
+    @ApiOperation(value = "新增用户", notes = "")
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean insertUser (@RequestBody User user)
+    {
+        return userService.insert(user);
+    }
+
+    @ApiOperation(value = "修改用户", notes = "")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean updateUser (@RequestBody User user)
+    {
+        return userService.updateById(user);
+    }
+
+
+
+
 }

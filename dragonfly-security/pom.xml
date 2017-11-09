@@ -12,6 +12,11 @@
     <groupId>com.dragonfly.cloud</groupId>
     <artifactId>dragonfly-security</artifactId>
 
+    <properties>
+        <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
+        <mybatisplus.version>2.1.4</mybatisplus.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -21,6 +26,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- druid数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.26</version>
         </dependency>
 
         <!-- spirng swagger ui-->
@@ -36,5 +53,13 @@
             <version>2.2.2</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.dragonfly.cloud</groupId>
+            <artifactId>dragonfly-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
+
+    
 </project>
