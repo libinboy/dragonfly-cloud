@@ -27,15 +27,14 @@ angular.module('app')
                           'vendor/jquery/spinner/jquery.bootstrap-touchspin.css'],
       wysiwyg:        ['vendor/jquery/wysiwyg/bootstrap-wysiwyg.js',
                           'vendor/jquery/wysiwyg/jquery.hotkeys.js'],
-      dataTable:      ['vendor/jquery/datatables/jquery.dataTables.min.js',
-                          'vendor/jquery/datatables/dataTables.bootstrap.js',
-                          'vendor/jquery/datatables/dataTables.bootstrap.css'],
       vectorMap:      ['vendor/jquery/jvectormap/jquery-jvectormap.min.js', 
                           'vendor/jquery/jvectormap/jquery-jvectormap-world-mill-en.js',
                           'vendor/jquery/jvectormap/jquery-jvectormap-us-aea-en.js',
                           'vendor/jquery/jvectormap/jquery-jvectormap.css'],
-      footable:       ['vendor/jquery/footable/footable.all.min.js',
-                          'vendor/jquery/footable/footable.core.css']
+
+      bootstrapTable: ['vendor/jquery/bootstrap-table/bootstrap-table.min.js',
+                        'vendor/jquery/bootstrap-table/locale/bootstrap-table-zh-CN.js',
+                        'vendor/jquery/bootstrap-table/bootstrap-table.min.css']
       }
   )
   // oclazyload config
@@ -46,11 +45,12 @@ angular.module('app')
           events: true,
           modules: [
               {
-                  name: 'ngGrid',
+                  name: 'bsTable',
                   files: [
-                      'vendor/modules/ng-grid/ng-grid.min.js',
-                      'vendor/modules/ng-grid/ng-grid.min.css',
-                      'vendor/modules/ng-grid/theme.css'
+                      'vendor/jquery/bootstrap-table/bootstrap-table.min.js',
+                      'vendor/jquery/bootstrap-table/extensions/angular/bootstrap-table-angular.js',
+                      'vendor/jquery/bootstrap-table/bootstrap-table-locale-all.js',
+                      'vendor/jquery/bootstrap-table/bootstrap-table.min.css'
                   ]
               },
               {

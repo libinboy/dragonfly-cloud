@@ -1,0 +1,27 @@
+﻿<div class="bg-white">
+	<ul class="breadcrumb b-a m-b-n-xs lter wrapper-md">
+	  <li><a href><i class="fa fa-home"></i> 系统管理</a></li>
+	  <li><a href><i class="fa fa-home"></i> 用户管理</a></li>
+	  <li class="active">新增用户</li>
+	</ul>
+</div>
+<div class="wrapper-md" ng-controller="addUserCtrl">
+
+	<form name="forma" class="form-horizontal">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-sm-1 control-label">Email</label>
+					<div class="col-sm-3">
+						<input type="email" class="form-control" name="email" placeholder="email" ng-model="form.email" required >
+					</div>
+				</div>
+			</div>
+			<footer class="panel-footer text-right lter">
+				<button type="submit" class="btn btn-success" ng-click="submit()">Submit</button>
+				<button type="reset" class="btn btn-default" ng-click="return()">Return</button>
+			</footer>
+		</div>
+	</form>
+
+</div>

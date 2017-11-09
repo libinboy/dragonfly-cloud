@@ -1,64 +1,89 @@
 app.controller('listUserCtrl', ['$scope', '$http', function($scope, $http) {
 
-    $scope.userVO = {};
+    $scope.form = {};
 
-    $scope.filterOptions = {
-        filterText: "",
-        useExternalFilter: false
-    }; 
-
-    $scope.totalServerItems = 0;
-
-    $scope.pagingOptions = {
-        pageSizes: [10, 20, 50, 100, 250, 500, 1000],
-        pageSize: 10,
-        currentPage: 1
+    $scope.user = {
+        baseUrl: "/security/user",
+        entity: "user",
+        tableId: "userTable",
+        toolbarId: "toolbar",
+        unique: "id",
+        order: "asc",
+        currentItem: {}
     };
 
-    $scope.gridOptions = {
-        data: 'myData',
-        enablePaging: true,
-        showFooter: true,
-        i18n:'zh-cn',
-        multiSelect:false,
-        totalServerItems: 'totalServerItems',
-        pagingOptions: $scope.pagingOptions,
-        filterOptions: $scope.filterOptions
+    $scope.user.columns = function () {
+        return [{
+            checkbox: true
+        }, {
+            field: 'account',
+            title: '账号',
+        }, {
+            field: 'password',
+            title: '密码'
+        }, {
+            field: 'userName',
+            title: '用户名'
+        }, {
+            field: 'operate',
+            title: '操作',
+            align: 'center',
+            formatter: $scope.operateFormatter
+        }];
     };
 
-    $scope.setPagingData = function(data, page, pageSize){  
-        var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-        $scope.myData = pagedData;
-        $scope.totalServerItems = data.length;
-        if (!$scope.$$phase) {
-            $scope.$apply();
+    $scope.operateFormatter = function(value, row, index) {
+        return [
+            '<button type="button" class="btn btn-default btn-sm">编辑</button>'
+        ].join('');
+    };
+
+    $scope.user.queryParams = function (params) {
+        if (!params)
+            return $scope.form;
+
+        $scope.form.limit = params.limit; //页面大小
+        $scope.form.offset = params.offset; //页面偏移量
+        return $scope.form;
+    };
+
+    $scope.bsTableControl =  {
+        options : {
+            url: $scope.user.baseUrl + '/page', //请求后台的URL（*）
+            // url: 'page/user/json/data2.json',
+            method: 'post', //请求方式（*）
+            toolbar: '#' + $scope.user.toolbarId, //工具按钮用哪个容器
+            striped: true, //是否显示行间隔色
+            cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true, //是否显示分页（*）
+            sortable: false, //是否启用排序
+            sortOrder: $scope.user.order, //排序方式
+            queryParams: $scope.user.queryParams,//传递参数（*）
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1, //初始化加载第一页，默认第一页
+            pageSize: 10, //每页的记录行数（*）
+            pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+            search: false, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: false,
+            showColumns: false, //是否显示所有的列
+            showRefresh: true, //是否显示刷新按钮
+            minimumCountColumns: 2, //最少允许的列数
+            clickToSelect: true, //是否启用点击选中行
+            uniqueId: $scope.user.unique, //每一行的唯一标识，一般为主键列
+            showToggle: true, //是否显示详细视图和列表视图的切换按钮
+            cardView: false, //是否显示详细视图
+            detailView: false, //是否显示父子表
+            locale: 'zh-CN',
+            columns: $scope.user.columns()
         }
     };
-    $scope.getPagedDataAsync = function (pageSize, page, searchText) {
-        setTimeout(function () {
-            $http.post('/security/user/list/page', $scope.userVO).success(function (largeLoad) {
-                $scope.setPagingData(largeLoad,page,pageSize);
-            });
-        }, 100);
-    };
 
-    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    /*$scope.submit = function () {
+        $scope.user.table.bootstrapTable('refresh', $scope.user.queryParams());
+    };*/
 
-    $scope.$watch('pagingOptions', function (newVal, oldVal) {
-        if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-          $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-        }
-    }, true);
+    //Select the workspace in document ready event
+    $(document).ready(function () {
 
-    $scope.$watch('filterOptions', function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-        }
-    }, true);
-
-    $scope.submit = function () {
-        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
-    };
-
-
+    });
 }]);

@@ -34,31 +34,42 @@ angular.module('app')
 
           // user
           .state('app.system', {
+              abstract: true,
               url: '/system',
-              template: '<div ui-view class="fade-in-down"></div>'
-          })
-          .state('app.system.user', {
+              template: '<div ui-view class="fade-in-right-big smooth"></div>'
+          }).state('app.system.user', {
               url: '/user',
+              title: '用户管理',
               templateUrl: 'page/user/listUser.html',
 			  resolve: {
 				deps: ['$ocLazyLoad',
                     function( $ocLazyLoad ){
-                        return $ocLazyLoad.load('ngGrid').then(
+                        return $ocLazyLoad.load('bsTable').then(
                             function(){
                                 return $ocLazyLoad.load('page/user/listUser.js');
                             }
-						);
+                        );
 					}
 				]
 			  }
+          }).state('app.system.user_add', {
+            url: '/add',
+            title: '新增用户',
+            templateUrl: 'page/user/addUser.html',
+            resolve: {
+                deps: ['$ocLazyLoad',
+                    function( $ocLazyLoad ){
+                        return $ocLazyLoad.load('page/user/addUser.js');
+                    }
+                ]
+            }
           })
 
           // access login
           .state('access', {
               url: '/access',
               template: '<div ui-view class="fade-in-right-big smooth"></div>'
-          })
-          .state('access.signin', {
+          }).state('access.signin', {
               url: '/signin',
               templateUrl: 'page/signin/signin.html',
               resolve: {
