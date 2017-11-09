@@ -23,6 +23,7 @@
         <module>dragonfly-ui</module>
         <module>dragonfly-gate</module>
         <module>dragonfly-security</module>
+        <module>dragonfly-common</module>
     </modules>
 
     <parent>
@@ -30,6 +31,10 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.2.RELEASE</version>
     </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <developers>
         <developer>
