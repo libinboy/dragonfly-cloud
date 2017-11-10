@@ -2,6 +2,7 @@ package com.dragonfly.cloud.security.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.dragonfly.cloud.common.bean.Pager;
 import com.dragonfly.cloud.common.response.BootstrapTableResponse;
 import com.dragonfly.cloud.security.entity.User;
 import com.dragonfly.cloud.security.service.UserService;
@@ -27,15 +28,16 @@ public class UserController
     private UserService userService;
 
     @ApiOperation(value = "查询用户列表", notes = "")
-    @PostMapping(value = "/page")
+    @PostMapping (value = "/page")
     @ResponseBody
-    public BootstrapTableResponse<User> selectUserListPage(@RequestParam(defaultValue = "10") int limit, @RequestParam(defaultValue = "1")int offset, @RequestBody User user)
+    public BootstrapTableResponse<User> selectUserListPage(@RequestBody User user)
     {
-        logger.debug("limit:" + limit);
-        logger.debug("offset:" + offset);
+        Pager pager = user.getPager();
+        logger.debug("pageNumber:" + pager.getPageNumber());
+        logger.debug("pageSize:" + pager.getPageSize());
         logger.debug("account:" + user.getAccount());
 
-        Page<User> page = new Page<>(offset, limit);
+        Page<User> page = new Page<>(pager.getPageNumber(), pager.getPageSize());
         EntityWrapper<User> entityWrapper = new EntityWrapper<>(user);
         userService.selectPage(page, entityWrapper);
 
@@ -47,7 +49,7 @@ public class UserController
     }
 
     @ApiOperation(value = "新增用户", notes = "")
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public boolean insertUser (@RequestBody User user)
     {
@@ -61,8 +63,5 @@ public class UserController
     {
         return userService.updateById(user);
     }
-
-
-
 
 }

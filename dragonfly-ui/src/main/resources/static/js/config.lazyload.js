@@ -47,10 +47,9 @@ angular.module('app')
               {
                   name: 'bsTable',
                   files: [
-                      'vendor/jquery/bootstrap-table/bootstrap-table.min.js',
-                      'vendor/jquery/bootstrap-table/extensions/angular/bootstrap-table-angular.js',
-                      'vendor/jquery/bootstrap-table/bootstrap-table-locale-all.js',
-                      'vendor/jquery/bootstrap-table/bootstrap-table.min.css'
+                      'vendor/modules/bootstrap-table/extensions/angular/bootstrap-table-angular.js',
+                      'vendor/modules/bootstrap-table/bootstrap-table-locale-all.min.js',
+                      'vendor/modules/bootstrap-table/bootstrap-table.min.css'
                   ]
               },
               {

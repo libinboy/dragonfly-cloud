@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.dragonfly.cloud.common.bean.Pager;
 
 import java.io.Serializable;
 
@@ -38,6 +39,9 @@ public class User implements Serializable
      */
     @TableField("user_name")
     private String userName;
+
+    @TableField(exist = false)
+    private Pager pager = new Pager();
 
     public User() {
     }
@@ -80,6 +84,16 @@ public class User implements Serializable
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    public Pager getPager()
+    {
+        return pager;
+    }
+
+    public void setPager(Pager pager)
+    {
+        this.pager = pager;
     }
 
     @Override public String toString()
