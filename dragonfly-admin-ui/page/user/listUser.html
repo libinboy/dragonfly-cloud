@@ -1,0 +1,35 @@
+﻿<div class="bg-white">
+	<ul class="breadcrumb b-a m-b-n-xs lter wrapper-md">
+	  <li><a href><i class="fa fa-home"></i> 系统管理</a></li>
+	  <li class="active">用户管理</li>
+	</ul>
+</div>
+<div class="wrapper-md" ng-controller="listUserCtrl">
+
+	<form name="forma" class="form-horizontal">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-sm-1 control-label">Email</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" name="email" placeholder="email" ng-model="form.account" required value="libin">
+					</div>
+				</div>
+			</div>
+			<footer class="panel-footer text-right lter">
+				<button type="submit" class="btn btn-success" ng-click="submit()">Submit</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</footer>
+		</div>
+	</form>
+
+	<div id="toolbar" class="layui-btn-group">
+		<a class="btn btn-default" id="btn_add" ui-sref="app.system.user_add">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		</a>
+	</div>
+
+	<table bs-table-control="bsTableControl">
+	</table>
+
+</div>

@@ -1,0 +1,42 @@
+<!-- list -->
+<ul class="nav">
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.HEADER">Navigation</span>
+  </li>
+
+  <li>
+    <a ui-sref="app.dashboard">
+      <i class="glyphicon glyphicon-th-large icon text-success"></i>
+      <span class="font-bold">首页</span>
+    </a>
+  </li>
+
+  <li ng-class="{active:$state.includes('app.system')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-list"></i>
+      <span>系统管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>系统管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.system.user">
+          <span>用户管理</span>
+        </a>
+      </li>
+      <!--<li ui-sref-active="active">
+        <a ui-sref="app.table.grid">
+          <span>角色管理</span>
+        </a>
+      </li>-->
+    </ul>
+  </li>
+</ul>
+<!-- / list -->
